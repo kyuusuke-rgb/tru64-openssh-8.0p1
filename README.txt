@@ -1,32 +1,28 @@
-================================================================
- OpenSSH 8.0p1 + OpenSSL 1.1.1 for Tru64 UNIX V5.1B (Alpha)
-================================================================
+# OpenSSH 8.0p1 for Tru64 UNIX (Alpha Architecture)
 
-[Description]
- Portable binary package of OpenSSH 8.0p1 and OpenSSL 1.1.1 
- built for Tru64 UNIX V5.1B (Alpha).
- Patched for Tru64 SIA (Security Integration Architecture) authentication.
+This repository provides pre-compiled OpenSSH 8.0p1 binaries, essential shared libraries, and installation scripts for Tru64 UNIX V5.1B running on DEC Alpha systems.
 
-[Restore Procedure] (Run as root)
+## Prerequisites
 
- 1. Extract package at root (/) directory:
-    # cd /
-    # tar xvzf openssh8-openssl111-tru64-v51b-portable.tar.gz
+- **OS**: Tru64 UNIX V5.1B (Alpha)
+- **Privilege**: Root access (`#`)
 
- 2. Create auto-start symlink (if not present):
-    # ln -s /sbin/init.d/sshd /sbin/rc3.d/S99sshd
+## Pre-compiled Release Assets
 
- 3. Generate host keys (Only when deploying to a NEW system):
-    # /usr/local/bin/ssh-keygen -A
+You can download the compiled archives from the [Releases](../../releases) section:
 
- 4. Start SSHD service:
-    # /sbin/init.d/sshd start
+- `openssh8-openssl111-tru64-v51b-portable.tar.gz`: Portable OpenSSH 8.0p1 binaries, OpenSSL 1.1.1 libraries, and configuration files.
+- `tru64_essential_libs.tar.gz`: Minimal set of dependency shared libraries required to run GCC and OpenSSH (e.g., `libmpc`, `libdb-3.1`, `libgcc_s`, `libgmp`, `libmpfr`, `libz`).
 
-[Technical Notes]
- - sshd dynamically links to OpenSSL 1.1.1 shared libraries under
-   /usr/local/ssl/lib.
- - Startup script (/sbin/init.d/sshd) includes LD_LIBRARY_PATH setting:
-   LD_LIBRARY_PATH=/usr/shlib:/usr/local/ssl/lib
- - Tested with modern macOS SSH clients (ed25519 / chacha20-poly1305).
+---
 
-================================================================
+## Quick Start & Installation
+
+### 1. Extract Essential Shared Libraries
+
+Extract the required shared libraries to `/usr/local/lib`:
+
+```sh
+# mkdir -p /usr/local/lib
+# cd /usr/local/lib
+# tar -zxvf /path/to/tru64_essential_libs.tar.gz
